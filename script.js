@@ -1,3 +1,22 @@
+var canvas; 
+var canvasWidth= 500;
+var canvasHeight= 400; 
+var button 
+var slider 
+var spread 
+function setup () {
+  canvas = createCanvas(canvasWidth,canvasHeight);
+  background (247, 244, 244);
+  canvas.parent("canvas-area");
+  canvas.mousePressed(drawSplatter);
+  button=select("#clear-button");
+  button.mousePressed(setup);
+  slider=select("#slider");
+  slider.input (updateSpread);
+  updateSpread();
+}
+
+
 // declare and initialize global variables
 
 /*
@@ -8,7 +27,19 @@
 /*
  * drawEllipse()
  */
+function drawSplatter(){
+  var circlesize = random (10,15);
+  fill(random (0,255), random(0,255), random (0,255));
+  noStroke ();
+  for (i=0; i<circlesize; i++);{
+    var radius = random (5,15);
+  ellipse (random (mouseX-spread,mouseX+spread), random (mouseY-spread,mouseY+spread), radius, radius );
+}
+}
 
+function updateSpread () {
+  spread = slider.value();
+}
 
 /*
  * updateSpread()
